@@ -1,5 +1,5 @@
 {
-  "name": "reso/reso-php",
+  "name": "savvycard/reso-php",
   "description": "RESO PHP SDK / Library",
   "keywords": [
     "reso",
@@ -13,6 +13,10 @@
     {
       "name": "RESO and contributors",
       "homepage": "https://github.com/RESO-RETS/RESOWebAPIReferenceClientinPHP/contributors"
+    },
+    {
+      "name": "Phillip Meeks",
+      "email": "phillip@savvycard.com"
     }
   ],
   "require": {
