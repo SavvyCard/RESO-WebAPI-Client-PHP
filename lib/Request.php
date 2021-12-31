@@ -55,6 +55,7 @@ abstract class Request
 
         // Send request
         $response = $curl->request("get", $url, $headers, null, false);
+        $curl->close();
         if(!$response || !is_array($response) || $response[1] != 200) {
             switch($response[1]) {
                 case "406":
