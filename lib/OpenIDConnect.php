@@ -135,6 +135,39 @@ class OpenIDConnect
     }
 
     /**
+     * Retrieves the access token.
+     *
+     * @param string $scope
+     *
+     * @return string Access token.
+     */
+    public static function requestAccessTokenViaClientCredentials($scope = "api")
+    {
+        \RESO\Reso::logMessage("Sending authorization request to retrieve access token.");
+
+        // Get variables
+        $api_token_url = \RESO\Reso::getAPITokenUrl();
+        $client_id = \RESO\Reso::getClientId();
+        $client_secret = \RESO\Reso::getClientSecret();
+
+        $curl = new \RESO\HttpClient\CurlClient();
+
+        $headers = array();
+        $params = array(
+            "client_id" => $client_id,
+            "client_secret" => $client_secret,
+            "scope" => $scope,
+            "grant_type" => "client_credentials",
+        );
+
+        $response = json_decode($curl->request("post", $api_token_url, $headers, $params, false)[0], true);
+        if(!$response || !is_array($response) || !isset($response["access_token"]))
+            throw new Error\Api("Failed to obtain access token.");
+
+        return $response["access_token"];
+    }
+
+    /**
      * Retrieves new access token (refresh).
      *
      * @return string Refreshed access token.
